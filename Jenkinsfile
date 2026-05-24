@@ -17,7 +17,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                bat 'docker build -t %ACR_LOGIN_SERVER%/%IMAGE_NAME%:latest .'
+                sh 'docker build -t $ACR_LOGIN_SERVER/$IMAGE_NAME:latest .'
             }
         }
 
@@ -30,14 +30,14 @@ pipeline {
                         passwordVariable: 'PASS'
                     )
                 ]) {
-                    bat 'docker login %ACR_LOGIN_SERVER% -u %USER% -p %PASS%'
+                    sh 'docker login $ACR_LOGIN_SERVER -u $USER -p $PASS'
                 }
             }
         }
 
         stage('Push Docker Image') {
             steps {
-                bat 'docker push %ACR_LOGIN_SERVER%/%IMAGE_NAME%:latest'
+                sh 'docker push $ACR_LOGIN_SERVER/$IMAGE_NAME:latest'
             }
         }
     }
