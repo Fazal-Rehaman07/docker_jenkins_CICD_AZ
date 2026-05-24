@@ -10,7 +10,7 @@ pipeline {
 
         stage('Clone Repository') {
             steps {
-                git branch: 'main',
+                git branch: 'master',
                 url: 'https://github.com/Fazal-Rehaman07/docker_jenkins_CICD_AZ.git'
             }
         }
